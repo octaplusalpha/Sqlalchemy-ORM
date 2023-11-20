@@ -1,0 +1,17 @@
+1. creche
+2. pre_nursery
+3. nursery_1
+4. nursery_2
+5. nursery_3
+5. basic_1
+6. basic_2
+7. basic_3
+8. basic_4
+9. basic_5
+10. JSS_1
+11. JSS_2
+12. JSS_3
+13. SSS_1
+14. SSS_2
+15. SSS_3
+
