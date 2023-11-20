@@ -62,6 +62,7 @@ class Teacher(TimeStampedModel):
                                                       back_populates='teachers')
     subjects: Mapped['Subject'] = Relationship('subjects', secondary='TeacherSubjects', back_populates='teachers')
     profile: Mapped['Profile'] = Relationship('profile', back_populates='teachers', uselist=False)
+    house: Mapped['Profile'] = Relationship('house', back_populates='teacher', uselist=False)
 
     def __repr__(self):
         return (f"{self.__class__.__name__} "
@@ -147,6 +148,21 @@ class Term(Model):
 
     def __repr__(self):
         return f"{self.__class__.__name__} First Name: {self.name} "
+
+
+class House(Model):
+    __tablename__ = 'houses'
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(String(20), nullable=False)
+    slug: Mapped[str] = mapped_column(String(2), nullable=False, unique=True)
+    students_id: Mapped[int] = mapped_column(ForeignKey('students.id'))
+    teachers_id: Mapped[int] = mapped_column(ForeignKey('teachers.id', ondelete='CASCADE'))
+    # relationship
+    teacher: Mapped['Teacher'] = Relationship('teachers', back_populates='houses', passive_deletes=True, uselist=False)
+    students: Mapped['Student'] = Relationship('students', back_populates='houses', passive_deletes=True)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__} House Name: {self.name} "
 
 
 # pivots
